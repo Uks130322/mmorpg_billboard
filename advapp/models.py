@@ -13,9 +13,12 @@ class Advert(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='author')
     date_creation = models.DateTimeField(auto_now_add=True, verbose_name='date of creation')
 
+    def get_absolute_url(self):
+        return reverse('advert', args=[str(self.id)])
+
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name='category')
+    name = models.CharField(max_length=255, blank=False, unique=True, verbose_name='category')
 
     def __str__(self):
         return self.name

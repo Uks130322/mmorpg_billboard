@@ -1,0 +1,19 @@
+{% extends 'default.html' %}
+
+{% block title %}
+    {{ get_title }}
+{% endblock title %}
+
+{% block content %}
+
+    <h3 class="text-center">
+    </h3>
+    <br>
+
+    <form class="text-center" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-lg btn-dark" type="submit" value="Сохранить">
+    </form>
+
+{% endblock content %}

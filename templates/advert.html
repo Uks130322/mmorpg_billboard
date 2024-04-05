@@ -1,0 +1,49 @@
+{% extends 'default.html' %}
+
+{% block title %}
+    Advert
+{% endblock title %}
+
+{% block content %}
+    <div style="display: flex; gap: 1rem;">
+        <img src="{{ advert.icon.url }}" style="border: 1px solid black; height: 200px; width: 200px;">
+        <div style="width: 100%;">
+            <h4><a class="nav-link" href="/advert/{{ advert.pk }}">
+                {{ advert.title }}
+            </a></h4>
+            <div><b>{{ advert.date_creation|date:'d M Y' }}</b></div>
+            <div>Автор: {{ advert.user_id.username }}</div>
+            <br>
+            <a style="text-decoration: none;"
+               href="{% url 'advert_cat_list' advert.category.id %}">
+                <span class="badge text-bg-secondary">{{ advert.category }}</span>
+            </a>
+        </div>
+    </div>
+<div style="width: 100%;">
+    {{ advert.content }}
+    {{ author }}
+    {{ query }}
+</div>
+    {% if is_author %}
+    {% csrf_token %}
+    <div class="text-center" >
+        <a style="text-decoration: none" href="/advert/{{ advert.pk }}/edit">
+            <input class="btn btn-light btn-outline-info" type="button" value="Редактировать" />
+        </a>
+        <a style="text-decoration: none" href="/advert/{{ advert.pk }}/delete">
+            <input id="deleteButton" class="btn btn-light btn-outline-info"
+                   type="button" value="Удалить" />
+        </a>
+    </div>
+    {% else %}
+    {% csrf_token %}
+        <div class="text-center" >
+        <a style="text-decoration: none" href="/advert/{{ advert.pk }}/respond/user={{ request.user.pk }}">
+            <input class="btn btn-lg btn-light btn-outline-info" type="button" value="Откликнуться" />
+        </a>
+    </div>
+    {% endif %}
+
+{% endblock content %}
+

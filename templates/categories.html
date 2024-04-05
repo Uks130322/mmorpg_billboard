@@ -1,7 +1,7 @@
 {% extends 'default.html' %}
 
 {% block title %}
-    Home
+    Categories
 {% endblock title %}
 
 {% block content %}
@@ -16,9 +16,10 @@
         </div>
     {% endcache %}
     <br>
-    <h3>Количество доступных объявлений: {{ page_obj.paginator.count }}</h3>
+    <h3>Количество объявлений в категории "{{ category }}": {{ page_obj.paginator.count }}</h3>
+
     <br><br>
-    {% if advert_list %}
+    {% if advert_cat_list %}
         {% for post in page_obj %}
             <div style="display: flex; gap: 1rem;">
                 <img src="{{ post.icon.url }}" style="border: 1px solid black; height: 150px; width: 150px;">
@@ -35,10 +36,9 @@
                     </a>
                 </div>
             </div>
-
-        <br><br><br>
         {% endfor %}
     {% else %}
-        <h4>Извините, объявлений сейчас нет!</h4>
+        <h4>Извините, объявлений в этой категории сейчас нет!</h4>
     {% endif %}
 {% endblock content %}
+

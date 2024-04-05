@@ -1,0 +1,20 @@
+{% extends 'default.html' %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block content %}
+    <h2>Страница авторизованного пользователя {{ request.user.username }}</h2>
+    <br>
+        <h4>Вы являетесь зарегистрированным пользователем.</h4>
+        <div>Вы можете создавать объявления и оставлять отклики.</div>
+    <div>Здесь выводится ваша персональная информация.</div>
+    <br><br>
+    <hr>
+    <div class="text-center" >
+        <button class="btn btn-lg btn-secondary"><a style="text-decoration: none; color: white" href="/create/">Добавить объявление</a></button>
+        <button class="btn btn-lg btn-secondary"><a style="text-decoration: none; color: white" href="/logout/">Выйти</a></button>
+    </div>
+{% endblock content %}
+

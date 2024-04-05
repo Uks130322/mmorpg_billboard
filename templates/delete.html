@@ -1,0 +1,19 @@
+{% extends 'default.html' %}
+
+{% block title %}
+    Delete advert
+{% endblock title %}
+
+{% block content %}
+    <h3 class="text-center">Удалить объявление</h3>
+    <br>
+    <form class="text-center" action="" method="post">
+        {% csrf_token %}
+        <p>Вы действительно хотите удалить это объявление?</p>
+        <input class="btn btn-light btn-outline-info" type="submit" value="Удалить">
+        <a style="text-decoration: none" href="/advert/{{ advert.pk }}">
+            <input class="btn btn-light btn-outline-info" type="button" value="Отмена" />
+        </a>
+    </form>
+
+{% endblock content %}

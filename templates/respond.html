@@ -1,0 +1,37 @@
+{% extends 'default.html' %}
+
+{% block title %}
+    Respond
+{% endblock title %}
+
+{% block content %}
+    <div style="display: flex; gap: 1rem;">
+        <img src="{{ advert.icon.url }}" style="border: 1px solid black; height: 200px; width: 200px;">
+        <div style="width: 100%;">
+            <h4><a class="nav-link" href="/advert/{{ advert.pk }}">
+                {{ advert.title }}
+            </a></h4>
+            <div><b>{{ advert.date_creation|date:'d M Y' }}</b></div>
+            <div>Автор: {{ advert.user_id.username }}</div>
+            <br>
+            <a style="text-decoration: none;"
+               href="{% url 'advert_cat_list' advert.category.id %}">
+                <span class="badge text-bg-secondary">{{ advert.category }}</span>
+            </a>
+        </div>
+    </div>
+<div style="width: 100%;">
+    {{ advert.content }}
+</div>
+    <h3 class="text-center">
+    </h3>
+    <br>
+
+    <form class="text-center" action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-lg btn-light btn-outline-info" type="submit" value="Отправить">
+    </form>
+
+{% endblock content %}
+

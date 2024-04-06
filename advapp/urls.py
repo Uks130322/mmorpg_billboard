@@ -2,7 +2,8 @@ from django.conf.urls.static import static
 from django.urls import path, include
 
 from billboard import settings
-from .views import AdvertList, AdvertDetail, AdvertCategoryList, ProfileView, AdvertCreate, AdvertEdit, AdvertDelete
+from .views import (AdvertList, AdvertDetail, AdvertCategoryList, ProfileView,
+                    AdvertCreate, AdvertEdit, AdvertDelete, RespondCreate, RespondList)
 
 urlpatterns = [
     path('home/', AdvertList.as_view(), name='advert_list'),
@@ -12,5 +13,6 @@ urlpatterns = [
     path('create/', AdvertCreate.as_view(), name='create'),
     path('advert/<int:pk>/edit/', AdvertEdit.as_view(), name='edit'),
     path('advert/<int:pk>/delete/', AdvertDelete.as_view(), name='delete'),
+    path('advert/<int:pk>/respond/', RespondCreate.as_view(), name='respond'),
+    path('my_responds/', RespondList.as_view(), name='my_responds'),
 ]
-

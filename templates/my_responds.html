@@ -1,0 +1,43 @@
+{% extends 'default.html' %}
+
+{% block title %}
+    My responds
+{% endblock title %}
+
+{% block content %}
+    <h2>Поиск откликов по объявлениям</h2>
+    <br>
+    <form action="" method="get">
+        <h5>{{ filterset.form.as_p }}</h5>
+        <input class="btn btn-secondary" type="submit" value="Найти" />
+    </form>
+    <br><br>
+    <h5>Количество найденых откликов: {{ page_obj.paginator.count }}</h5>
+    <br><br>
+    {% if responds %}
+        {% for respond in page_obj %}
+
+            <h4><a class="nav-link" href="/advert/{{ respond.advert_id.id }}">
+                Объявление: {{ respond.advert_id.title}}</a></h4>
+            <br>
+            <h5>Отклик: {{ respond.content }}</h5>
+            <table width="100%">
+                <tr>
+                    <td width="200"><div>{{ respond.date_creation|date:'d M Y' }}</div>
+                        <div>Автор: {{ respond.user_id|truncatechars:20 }}</div>
+                    </td>
+                    <td align="left"><div>
+                        <input class="btn btn-sm btn-light btn-outline-info" type="submit" value="Принять" />
+                        <input class="btn btn-sm btn-light btn-outline-info" type="submit" value="Удалить" />
+                    </div>
+                    </td>
+                </tr>
+            </table>
+
+        <br><br><br>
+        {% endfor %}
+    {% else %}
+        <h4>Извините, откликов сейчас нет!</h4>
+    {% endif %}
+{% endblock content %}
+

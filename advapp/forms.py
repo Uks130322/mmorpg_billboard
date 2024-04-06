@@ -26,6 +26,7 @@ class AdvertForm(forms.ModelForm):
 class RespondForm(forms.ModelForm):
     content = forms.CharField(
         min_length=10,
+        max_length=1000,
         widget=forms.Textarea({'cols': 70, 'rows': 3})
     )
 

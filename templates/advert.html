@@ -36,10 +36,12 @@
                    type="button" value="Удалить" />
         </a>
     </div>
+    {% elif responded %}
+    <h5>Вы откликнулись на это объявление</h5>
     {% else %}
     {% csrf_token %}
         <div class="text-center" >
-        <a style="text-decoration: none" href="/advert/{{ advert.pk }}/respond/user={{ request.user.pk }}">
+        <a style="text-decoration: none" href="/advert/{{ advert.pk }}/respond/">
             <input class="btn btn-lg btn-light btn-outline-info" type="button" value="Откликнуться" />
         </a>
     </div>

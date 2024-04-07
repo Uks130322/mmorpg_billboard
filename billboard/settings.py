@@ -50,8 +50,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_filters',
     'django_summernote',
-    # users apps
-    # 'advapp',
 ]
 
 MIDDLEWARE = [

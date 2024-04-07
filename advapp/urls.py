@@ -1,7 +1,5 @@
-from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import path
 
-from billboard import settings
 from .views import (AdvertList, AdvertDetail, AdvertCategoryList, ProfileView,
                     AdvertCreate, AdvertEdit, AdvertDelete, RespondCreate, RespondList,
                     RespondDelete, accept_respond, ConfirmUser)

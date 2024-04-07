@@ -6,4 +6,5 @@ class AdvappConfig(AppConfig):
     name = 'advapp'
 
     def ready(self):
+        """Add this configs in settings.py to plug the signals"""
         import advapp.signals

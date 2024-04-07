@@ -1,20 +1,22 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.core.mail import mail_managers, EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
 from billboard.settings import SITE_URL, DEFAULT_FROM_EMAIL
-from .models import Advert, Respond
+from .models import Respond
 
 
 @receiver(post_save, sender=Respond)
 def get_respond(sender, instance, created, **kwargs):
     if created:
+        # we will send message to advert author
         destination = [instance.advert_id.user_id.email]
         title = 'Новый отклик на Ваше объявление!'
         text = f'Пользователь {instance.user_id.username} оставил отклик на Ваше объявление:'
 
     else:
+        # we will send message to respond author. If not created means respond was accepted
         destination = [instance.user_id.email]
         title = 'Ваш отклик принят!'
         text = f'Пользователь {instance.advert_id.user_id.username} принял Ваш отклик:'

@@ -31,14 +31,15 @@
                         <p>Отклик принят</p>
                         {% else %}
                         <form action="" method="post">
-                        {% csrf_token %}
-                        <a style="text-decoration: none" href="{% url 'accept_respond' respond.id %}">
-                            <input class="btn btn-sm btn-light btn-outline-info" type="button" value="Принять" />
-                        </a>
-                        <a style="text-decoration: none" href="/my_responds/{{ respond.id }}/delete">
-                            <input id="deleteButton" class="btn btn-sm btn-light btn-outline-info"
-                                   type="button" value="Удалить" />
-                        </a>
+                            {% csrf_token %}
+                            <a style="text-decoration: none" href="{% url 'accept_respond' respond.id %}">
+                                <input class="btn btn-sm btn-light btn-outline-info"
+                                       type="button" value="Принять" />
+                            </a>
+                            <a style="text-decoration: none" href="/my_responds/{{ respond.id }}/delete">
+                                <input id="deleteButton" class="btn btn-sm btn-light btn-outline-info"
+                                       type="button" value="Удалить" />
+                            </a>
                         </form>
                         {% endif %}
                     </td>

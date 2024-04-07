@@ -1,16 +1,8 @@
-from django import forms
-from django_filters import FilterSet, ModelChoiceFilter, DateFilter, CharFilter
+from django_filters import FilterSet, ModelChoiceFilter
 from .models import Advert, Respond
 
 
 class RespondFilter(FilterSet):
-    # category = ModelChoiceFilter(
-    #     queryset=Category.objects.all(),
-    #     lookup_expr='exact',
-    #     label='Категория',
-    #     empty_label='Все категории',
-    # )
-
     advert = ModelChoiceFilter(
         queryset=Respond.objects.all(),
         lookup_expr='exact',

@@ -1,12 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
-from django.urls import reverse_lazy, reverse
-from django.views import View
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import (ListView, DetailView, CreateView, UpdateView,
+                                  DeleteView, TemplateView)
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .filters import RespondFilter
@@ -23,6 +22,7 @@ class AdvertList(ListView):
     extra_context = {'adverts': Advert.objects.all()}
 
     def get_context_data(self, *, object_list=None, **kwargs):
+        """Paginator and all categories"""
         context = super().get_context_data(**kwargs)
         page = context['page_obj']
         context['all_categories'] = Category.objects.all()
@@ -59,6 +59,7 @@ class AdvertCategoryList(ListView):
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
+        """Paginator and all categories"""
         context = super().get_context_data(**kwargs)
         page = context['page_obj']
         context['all_categories'] = Category.objects.all()
@@ -135,6 +136,7 @@ class RespondList(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
+        """Get all the responds to user's adverts"""
         queryset = Respond.objects.filter(advert_id__user_id=self.request.user).order_by('-date_creation')
         self.filterset = RespondFilter(self.request.GET, queryset, request=self.request.user)
         return self.filterset.qs

@@ -43,13 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'advapp.apps.AdvappConfig',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'django_filters',
     'django_summernote',
     # users apps
-    'advapp',
+    # 'advapp',
 ]
 
 MIDDLEWARE = [

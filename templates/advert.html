@@ -20,11 +20,11 @@
             </a>
         </div>
     </div>
+<br>
 <div style="width: 100%;">
     {{ advert.content|safe }}
-    {{ author }}
-    {{ query }}
 </div>
+<br><br>
     {% if is_author %}
     {% csrf_token %}
     <div class="text-center" >

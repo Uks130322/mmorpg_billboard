@@ -14,11 +14,11 @@ class Code(models.Model):
 
 
 class Advert(models.Model):
-    title = models.CharField(max_length=511, verbose_name="advert's title")
-    content = models.TextField(verbose_name='content')  # here will be WYSIWYG
-    icon = models.ImageField(upload_to='icons', default='icons/blanc.png', verbose_name='icon for preview')
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='category')
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='author')
+    title = models.CharField(max_length=511, verbose_name="Заголовок")
+    content = models.TextField(verbose_name='Контент')  # here will be WYSIWYG
+    icon = models.ImageField(upload_to='icons', default='icons/blanc.png', verbose_name='Изображение для превью')
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
     date_creation = models.DateTimeField(auto_now_add=True, verbose_name='date of creation')
 
     def get_absolute_url(self):
@@ -29,16 +29,16 @@ class Advert(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, blank=False, unique=True, verbose_name='category')
+    name = models.CharField(max_length=255, blank=False, unique=True, verbose_name='Категория')
 
     def __str__(self):
         return self.name
 
 
 class Respond(models.Model):
-    content = models.TextField(verbose_name='comment')
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='author')
-    advert_id = models.ForeignKey('Advert', on_delete=models.CASCADE, verbose_name='advert')
+    content = models.TextField(verbose_name='Отклик')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    advert_id = models.ForeignKey('Advert', on_delete=models.CASCADE, verbose_name='Объявление')
     date_creation = models.DateTimeField(auto_now_add=True, verbose_name='date of creation')
     accepted = models.BooleanField(default=False)
 

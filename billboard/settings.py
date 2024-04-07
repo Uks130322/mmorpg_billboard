@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'django_filters',
+    'django_summernote',
     # users apps
     'advapp',
 ]
@@ -174,7 +175,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
-# ACCOUNT_FORMS = {'signup': 'News.forms.CommonSignupForm'}
+ACCOUNT_FORMS = {'signup': 'advapp.forms.CommonSignupForm'}
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
@@ -183,3 +184,5 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 # ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
+SUMMERNOTE_THEME = 'bs5'

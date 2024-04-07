@@ -5,10 +5,18 @@ from django.utils.translation import gettext as _
 from django.utils.translation import pgettext_lazy
 
 
+class Code(models.Model):
+    number = models.CharField(max_length=15, blank=True, null=True, verbose_name='code')
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='user')
+
+    def __str__(self):
+        return self.number
+
+
 class Advert(models.Model):
     title = models.CharField(max_length=511, verbose_name="advert's title")
     content = models.TextField(verbose_name='content')  # here will be WYSIWYG
-    icon = models.ImageField(default='blanc.png', verbose_name='icon for preview')
+    icon = models.ImageField(upload_to='icons', default='icons/blanc.png', verbose_name='icon for preview')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='category')
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='author')
     date_creation = models.DateTimeField(auto_now_add=True, verbose_name='date of creation')

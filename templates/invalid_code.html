@@ -1,0 +1,12 @@
+{% extends 'default.html' %}
+{% block title %}
+    Invalid code
+{% endblock title %}
+
+{% block content %}
+    <h2 style="text-decoration: none">Неверный код активации</h2>
+    <form style="text-decoration: none">
+            <input type="button" onclick="history.back();"
+                   class="btn btn-lg btn-light btn-outline-info" value="Вернуться к вводу кода">
+    </form>
+{% endblock content %}

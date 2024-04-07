@@ -3,9 +3,11 @@ from django.urls import path, include
 
 from billboard import settings
 from .views import (AdvertList, AdvertDetail, AdvertCategoryList, ProfileView,
-                    AdvertCreate, AdvertEdit, AdvertDelete, RespondCreate, RespondList, RespondDelete, accept_respond)
+                    AdvertCreate, AdvertEdit, AdvertDelete, RespondCreate, RespondList,
+                    RespondDelete, accept_respond, ConfirmUser)
 
 urlpatterns = [
+    path('confirm/', ConfirmUser.as_view(), name='confirm_user'),
     path('home/', AdvertList.as_view(), name='advert_list'),
     path('advert/<int:pk>', AdvertDetail.as_view(), name='advert'),
     path('categories/<int:pk>', AdvertCategoryList.as_view(), name='advert_cat_list'),

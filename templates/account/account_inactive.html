@@ -1,0 +1,16 @@
+{% extends 'default.html' %}
+{% load i18n %}
+{% load allauth %}
+{% block head_title %}
+    Активация аккаунта
+{% endblock head_title %}
+{% block content %}
+    <h2 style="text-decoration: none">Введите код активации</h2>
+    <form action="{% url 'confirm_user' %}" method="post" style="text-decoration: none">
+        {% csrf_token %}
+        <label>
+            <input class="text" name="code" placeholder="Введите код активации">
+        </label>
+        <input type="submit" value="Подтвердить">
+    </form>
+{% endblock content %}

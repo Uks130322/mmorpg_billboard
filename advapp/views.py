@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -9,8 +10,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .filters import RespondFilter
-from .forms import AdvertForm, RespondForm
-from .models import Advert, Respond, Category
+from .forms import AdvertForm, RespondForm, CommonSignupForm
+from .models import Advert, Respond, Category, Code
 
 
 class AdvertList(ListView):
@@ -151,6 +152,26 @@ class RespondDelete(LoginRequiredMixin, DeleteView):
     model = Respond
     template_name = 'respond_delete.html'
     success_url = reverse_lazy('my_responds')
+
+
+class ConfirmUser(UpdateView):
+    model = Code
+    form_class = CommonSignupForm
+    context_object_name = 'confirm_user'
+
+    def post(self, request, *args, **kwargs):
+        if 'code' in request.POST:
+            code_obj = Code.objects.filter(number=request.POST['code'])
+            if code_obj.exists():
+                user = User.objects.get(id=code_obj[0].user_id.id)
+                user.is_active = True
+                user.save()
+                code_obj[0].number = None
+                code_obj[0].save()
+                return redirect('profile')
+            else:
+                return render(self.request, template_name='invalid_code.html')
+        return redirect('profile')
 
 
 @login_required

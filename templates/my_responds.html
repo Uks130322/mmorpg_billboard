@@ -26,10 +26,21 @@
                     <td width="200"><div>{{ respond.date_creation|date:'d M Y' }}</div>
                         <div>Автор: {{ respond.user_id|truncatechars:20 }}</div>
                     </td>
-                    <td align="left"><div>
-                        <input class="btn btn-sm btn-light btn-outline-info" type="submit" value="Принять" />
-                        <input class="btn btn-sm btn-light btn-outline-info" type="submit" value="Удалить" />
-                    </div>
+                    <td align="left">
+                        {% if respond.accepted %}
+                        <p>Отклик принят</p>
+                        {% else %}
+                        <form action="" method="post">
+                        {% csrf_token %}
+                        <a style="text-decoration: none" href="{% url 'accept_respond' respond.id %}">
+                            <input class="btn btn-sm btn-light btn-outline-info" type="button" value="Принять" />
+                        </a>
+                        <a style="text-decoration: none" href="/my_responds/{{ respond.id }}/delete">
+                            <input id="deleteButton" class="btn btn-sm btn-light btn-outline-info"
+                                   type="button" value="Удалить" />
+                        </a>
+                        </form>
+                        {% endif %}
                     </td>
                 </tr>
             </table>
@@ -39,5 +50,16 @@
     {% else %}
         <h4>Извините, откликов сейчас нет!</h4>
     {% endif %}
+
+<script>
+/*   const deleteBtn = document.getElementById('deleteButton')
+
+    const deleteHandler = () => {
+        confirm('Вы действительно хотите удалить этот отклик?')
+    }
+
+    document.addEventListener('click', deleteHandler)
+*/
+</script>
 {% endblock content %}
 

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -144,3 +145,17 @@ class RespondList(LoginRequiredMixin, ListView):
         context['paginator_range'] = page.paginator.get_elided_page_range(
             page.number, on_each_side=1, on_ends=1)
         return context
+
+
+class RespondDelete(LoginRequiredMixin, DeleteView):
+    model = Respond
+    template_name = 'respond_delete.html'
+    success_url = reverse_lazy('my_responds')
+
+
+@login_required
+def accept_respond(request, pk):
+    respond = Respond.objects.get(id=pk)
+    respond.accepted = True
+    respond.save()
+    return redirect('my_responds')

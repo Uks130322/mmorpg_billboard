@@ -1,19 +1,20 @@
 {% extends 'default.html' %}
 
 {% block title %}
-    Delete advert
+    Delete respond
 {% endblock title %}
 
 {% block content %}
-    <h3 class="text-center">Удалить объявление</h3>
+    <h3 class="text-center">Удалить отклик</h3>
     <br>
     <form class="text-center" action="" method="post">
         {% csrf_token %}
-        <p>Вы действительно хотите удалить это объявление?</p>
+        <p>Вы действительно хотите удалить этот отклик?</p>
         <input class="btn btn-light btn-outline-info" type="submit" value="Удалить">
-        <a style="text-decoration: none" href="/advert/{{ advert.pk }}">
+        <a style="text-decoration: none" href="/my_responds/">
             <input class="btn btn-light btn-outline-info" type="button" value="Отмена" />
         </a>
     </form>
 <br><br><br><br>
+
 {% endblock content %}

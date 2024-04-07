@@ -3,7 +3,7 @@ from django.urls import path, include
 
 from billboard import settings
 from .views import (AdvertList, AdvertDetail, AdvertCategoryList, ProfileView,
-                    AdvertCreate, AdvertEdit, AdvertDelete, RespondCreate, RespondList)
+                    AdvertCreate, AdvertEdit, AdvertDelete, RespondCreate, RespondList, RespondDelete, accept_respond)
 
 urlpatterns = [
     path('home/', AdvertList.as_view(), name='advert_list'),
@@ -15,4 +15,6 @@ urlpatterns = [
     path('advert/<int:pk>/delete/', AdvertDelete.as_view(), name='delete'),
     path('advert/<int:pk>/respond/', RespondCreate.as_view(), name='respond'),
     path('my_responds/', RespondList.as_view(), name='my_responds'),
+    path('my_responds/<int:pk>/delete/', RespondDelete.as_view(), name='respond_delete'),
+    path('my_responds/<int:pk>/accept/', accept_respond, name='accept_respond'),
 ]

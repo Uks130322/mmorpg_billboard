@@ -2,13 +2,14 @@ from django.urls import path
 
 from .views import (AdvertList, AdvertDetail, AdvertCategoryList, ProfileView,
                     AdvertCreate, AdvertEdit, AdvertDelete, RespondCreate, RespondList,
-                    RespondDelete, accept_respond, ConfirmUser)
+                    RespondDelete, accept_respond, ConfirmUser, subscribe)
 
 urlpatterns = [
     path('confirm/', ConfirmUser.as_view(), name='confirm_user'),
     path('home/', AdvertList.as_view(), name='advert_list'),
     path('advert/<int:pk>', AdvertDetail.as_view(), name='advert'),
     path('categories/<int:pk>', AdvertCategoryList.as_view(), name='advert_cat_list'),
+    path('categories/<int:pk>/subscribe', subscribe, name='subscribe'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('create/', AdvertCreate.as_view(), name='create'),
     path('advert/<int:pk>/edit/', AdvertEdit.as_view(), name='edit'),

@@ -7,6 +7,8 @@
 <body>
     <h3>{{ text }}</h3>
         <h2>Объявление: <a href="{{ link }}">{{ advert }}</a></h2>
-    <p>Отклик: {{ respond }}</p>
+    {% if respond %}
+        <p>Отклик: {{ respond }}</p>
+    {% endif %}
 </body>
 </html>

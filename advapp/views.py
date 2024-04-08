@@ -66,6 +66,7 @@ class AdvertCategoryList(ListView):
         context['category'] = self.category
         context['paginator_range'] = page.paginator.get_elided_page_range(
             page.number, on_each_side=1, on_ends=1)
+        context['is_subscriber'] = self.request.user in self.category.subscribers.all()
         return context
 
 
@@ -182,3 +183,11 @@ def accept_respond(request, pk):
     respond.accepted = True
     respond.save()
     return redirect('my_responds')
+
+
+@login_required
+def subscribe(request, pk):
+    user = request.user
+    category = Category.objects.get(id=pk)
+    category.subscribers.add(user)
+    return redirect('advert_cat_list', pk)

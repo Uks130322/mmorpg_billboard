@@ -17,8 +17,17 @@
     {% endcache %}
     <br>
     <h3>Количество объявлений в категории "{{ category }}": {{ page_obj.paginator.count }}</h3>
-
-    <br><br>
+    {% if is_subscriber %}
+        <h6>Вы подписаны на категорию "{{ category }}"</h6>
+    {% else %}
+        <div>
+            <a style="text-decoration: none" href="{% url 'subscribe' category.id %}">
+                <input title="Рассылка о новых объявлениях в этой категории"
+                       class="btn btn-lg btn-light" type="button" value="Подписаться" />
+            </a>
+        </div>
+    {% endif %}
+    <br><br><br>
     {% if advert_cat_list %}
         {% for post in page_obj %}
             <div style="display: flex; gap: 1rem;">

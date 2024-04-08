@@ -28,6 +28,7 @@ class Advert(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=255, blank=False, unique=True, verbose_name='Категория')
+    subscribers = models.ManyToManyField(User, blank=True, related_name='categories', verbose_name="Подписчики")
 
     def __str__(self):
         return self.name

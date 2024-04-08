@@ -40,9 +40,9 @@ class AdvertDetail(DetailView):
         """In the template will be different buttons depending on whether the user is the author.
         If user responded to this adv, he'll see the corresponding message"""
         context = super().get_context_data(**kwargs)
-        adv_author = Advert.objects.get(id=self.request.path.split('/')[-1]).user_id
+        adv_author = Advert.objects.get(id=self.kwargs['pk']).user_id
         context['is_author'] = self.request.user == adv_author
-        responds_authors = Respond.objects.filter(advert_id=self.request.path.split('/')[-1]).values('user_id')
+        responds_authors = Respond.objects.filter(advert_id=self.kwargs['pk']).values('user_id')
         context['responded'] = {'user_id': self.request.user.id} in responds_authors
         return context
 
@@ -119,14 +119,14 @@ class RespondCreate(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         """Get correct advert from url-path"""
         context = super().get_context_data(**kwargs)
-        context['advert'] = Advert.objects.get(id=self.request.path.split('/')[-3])
+        context['advert'] = Advert.objects.get(id=self.kwargs['pk'])
         return context
 
     def form_valid(self, form):
         """Get author = user, get advert_id"""
         respond = form.save(commit=False)
         respond.user_id = self.request.user
-        respond.advert_id = Advert.objects.get(id=self.request.path.split('/')[-3])
+        respond.advert_id = Advert.objects.get(id=self.kwargs['pk'])
         return super().form_valid(form)
 
 
